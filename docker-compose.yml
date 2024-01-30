@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  front:
+    container_name: doo-re-front
+    build:
+      context: ./docker
+      dockerfile: front.dockerfile
+    ports:
+      - 3001:3001
+    environment:
+      - PORT=3001
