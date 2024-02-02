@@ -15,20 +15,12 @@ fi
 echo "Delete old files"
 rm -r $BUILD_PATH/*
 
-### Download layered jar From S3
-echo "Download layered jar From S3"
+### Download Build Files From S3
+echo "Download Build Files From S"
 aws s3 cp s3://doo-re-dev-bucket/doo-re-front-dev-deploy/ $BUILD_PATH --include=$1.tar.gz* --recursive
 
-if [ -d $BUILD_PATH/application ]
-then
-    rm -r \
-        $BUILD_PATH/dependencies \
-        $BUILD_PATH/snapshot-dependencies \
-        $BUILD_PATH/spring-boot-loader \
-        $BUILD_PATH/application
-fi
-
-echo "Unzip layered jar"
+### Unzip Build Files
+echo "Unzip Build Files"
 cd $BUILD_PATH
 cat $1.tar.gz* | tar zxvf -
 rm $1.tar.gz*
